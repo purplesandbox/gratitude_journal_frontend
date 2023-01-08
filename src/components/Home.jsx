@@ -7,7 +7,7 @@ import Axios from "axios";
 document.body.style.backgroundImage = ("./IMG-1078.jpg");
 
 
-const API_BASE = "https://bullet-point-journal.com";
+const API_BASE = "https://bullet-point-journal.onrender.com";
 
 function Home() {
   
