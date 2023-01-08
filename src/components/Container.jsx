@@ -5,7 +5,7 @@ import Axios from "axios";
 
 
 
-const API_BASE = "http://localhost:3001";
+const API_BASE = "https://bullet-point-journal.com";
 
 
 function Container({heading, onAdd, placeholder, data, allSteps, delSteps, allAffirmations,

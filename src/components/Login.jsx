@@ -5,7 +5,7 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import md5 from "md5";
 
-const API_BASE = "http://localhost:3001";
+const API_BASE = "https://bullet-point-journal.com";
 
 function Login() {
 
