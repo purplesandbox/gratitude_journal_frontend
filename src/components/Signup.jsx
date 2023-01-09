@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Validation from "./Validation";
 import Axios from "axios";
 
-const API_BASE = "https://bullet-point-journal.onrender.com";
+const API_BASE = "https://bullet-point-journal-backend.onrender.com";
 
 
   function Signup({submitForm}) {

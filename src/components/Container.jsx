@@ -5,7 +5,7 @@ import Axios from "axios";
 
 
 
-const API_BASE = "https://bullet-point-journal.onrender.com";
+const API_BASE = "https://bullet-point-journal-backend.onrender.com";
 
 
 function Container({heading, onAdd, placeholder, data, allSteps, delSteps, allAffirmations,
