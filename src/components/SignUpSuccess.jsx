@@ -6,7 +6,7 @@ const SignUpFormSuccess = () => {
         <div className = "success_container">
             <div className = "app-wrapper">
                 <h1 className = "form-success">Account Created!</h1>
-                <p><Link className = "registrationLink"  to="/">Happy journaling!</Link></p>
+                <p><Link className = "registrationLink"  to="/home">Happy journaling!</Link></p>
                 
             </div>
 

@@ -16,8 +16,8 @@ function Navbar() {
     </label>
 
     <ul className ="menu__box">
-      <li><Link className="menu__item" href="#" to="/login">Logout</Link></li>
-      <li><Link className="menu__item" href="#" to="/">Home</Link></li>
+      <li><Link className="menu__item" href="#" to="/">Logout</Link></li>
+      <li><Link className="menu__item" href="#" to="/home">Home</Link></li>
 
     </ul>
   </div>
