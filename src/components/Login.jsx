@@ -25,6 +25,7 @@ function Login() {
       ...user,
       [event.target.name]:event.target.value,
     })
+   
   }
 
   let navigate = useNavigate();
@@ -39,9 +40,10 @@ function Login() {
         if (dataFetched.some(obj => obj.email === user.email)) {
 
           const relIndex = dataFetched.findIndex((obj => obj.email === user.email));
+          
 
           if (response.data[relIndex]["password"] === md5(user.password)) {
-            navigate('/'); 
+            navigate('/home'); 
           } else {
             setPassword(true);
             alert("Incorrectly entered password")
