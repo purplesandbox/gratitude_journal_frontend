@@ -61,10 +61,6 @@ function Login() {
 
 
 
-
-
-
-
 const handleFormSubmit = (event) => {
     event.preventDefault();
     checkPresenceInDB(user);

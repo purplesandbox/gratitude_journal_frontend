@@ -118,7 +118,7 @@ const addStep =  async (inputText) => {
         <Container
         containerId = "gratitudes"
         placeholder = "I'm greatful for ..✍🏻"
-        heading = "My daily gratitudes" 
+        heading = "What am I greatful for?" 
         onAdd={addGratitude}
         data = {gr}
         allGratitudes = {gratitudes}
@@ -130,7 +130,7 @@ const addStep =  async (inputText) => {
         <Container
         containerId = "affirmations"
         placeholder = "I'm ..✍🏻"
-        heading = "My daily affirmations"
+        heading = "What would make today great?"
         onAdd={addAffirmation}
         data = {aff}
         allAffirmations = {affirmations}
@@ -143,7 +143,7 @@ const addStep =  async (inputText) => {
 
         <Container
         containerId = "steps"  
-        heading = "Steps towards my goals"
+        heading = "What steps will I make towards my goals?"
         placeholder = "Today I will ..✍🏻"
         onAdd={addStep}
         data = {st}
