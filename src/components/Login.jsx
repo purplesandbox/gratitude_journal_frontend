@@ -4,15 +4,25 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import md5 from "md5";
+import { createGlobalState } from "react-hooks-global-state";
 
 const API_BASE = "https://bullet-point-journal-users.onrender.com";
 
-function Login() {
+const { setGlobalState , useGlobalState} = createGlobalState({
 
-  const [user, setUser] = useState({
-    email:"",
-    password:""
-  });
+  email:"",
+  password:""
+ 
+});
+
+
+
+function Login() {
+  let [email] = useGlobalState("email");
+  const [password] = useGlobalState("password");
+
+
+  
 
   const [incorrectpassword, setPassword] = useState(false);
 
@@ -20,29 +30,39 @@ function Login() {
 
 
 
-  const handleChange = (event) => {
-    setUser({
-      ...user,
-      [event.target.name]:event.target.value,
-    })
-   
-  }
+  const handleChange1 = (event) => {
+
+  setGlobalState(
+    "email", event.target.value
+
+  )};
+
+  const handleChange2 = (event) => {
+
+    setGlobalState(
+      "password", event.target.value
+  
+    );
+
+
+};
 
   let navigate = useNavigate();
 
-  const checkPresenceInDB = (user) => {
+  const checkPresenceInDB = (email, password) => {
     Axios.get(API_BASE + "/users").then((response) => {
+
        //Find email of specific object using findIndex method. 
        const dataFetched = response.data;
 
+
+        if (dataFetched.filter(obj => obj.email === email).length>0) {
+          
+          const relIndex = dataFetched.findIndex((obj => obj.email === email));
         
 
-        if (dataFetched.some(obj => obj.email === user.email)) {
-
-          const relIndex = dataFetched.findIndex((obj => obj.email === user.email));
-          
-
-          if (response.data[relIndex]["password"] === md5(user.password)) {
+          if (response.data[relIndex]["password"] === password) {
+            
             navigate('/home'); 
           } else {
             setPassword(true);
@@ -63,7 +83,7 @@ function Login() {
 
 const handleFormSubmit = (event) => {
     event.preventDefault();
-    checkPresenceInDB(user);
+    checkPresenceInDB(email, password);
     
  
   };
@@ -73,8 +93,8 @@ const handleFormSubmit = (event) => {
         <div>
         <h1 className="login_greeting">Hello!</h1>
         <form>
-        <input type = "email" name = "email" value = {user.email} onChange = {handleChange}  className = "login_input" placeholder="email"  />
-        <input type = "password" name = "password" value = {user.password} onChange = {handleChange} className = "login_input" placeholder="password" />
+        <input type = "email" name = "email" value = {email} onChange = {handleChange1}  className = "login_input" placeholder="email"  />
+        <input type = "password" name = "password" value = {password} onChange = {handleChange2} className = "login_input" placeholder="password" />
         <button className="login_button" onClick={handleFormSubmit}>Login</button>
         </form>
         
@@ -87,6 +107,7 @@ const handleFormSubmit = (event) => {
   };
 
 export default Login;
+export {useGlobalState, setGlobalState};
 
 
 

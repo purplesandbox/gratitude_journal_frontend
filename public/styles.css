@@ -24,7 +24,7 @@ body {
 }
 
 .registrationLink {
-  color: white;
+  color:  black;;
   
 }
 
@@ -32,7 +32,7 @@ body {
 
   color:white;
   font-weight:"lighter";
-  font-family: "Segoe script";
+  font-family: "Segoe script", "Lumen", "sans-serif";
   display: static;
   margin-left: 20%;
   position: relative;
@@ -96,7 +96,7 @@ body {
 border: transparent;
 max-width: 12rem;
 text-align: left;
-font-family: "Segoe script", sans-serif;
+font-family: "Segoe script", "Lumen", "sans-serif";
 font-size: 1rem;
 outline: none;
 
@@ -157,21 +157,21 @@ header {
   width: 100%;
   font-size: 2vw;
   color: hsl(198, 1%, 29%);
-  font-family: "Segoe script", sans-serif;
+  font-family: "Segoe script", "Lumen", "sans-serif"
 }
 
 .date {
   position: absolute;
   font-size: 1.5vw;
   left: 5vw;
-  font-family: "Segoe script", sans-serif;
+  font-family: "Segoe script", "Lumen", "sans-serif"
 }
 
 .logo {
   position: absolute;
   right: 5vw;
   font-size: 1.5vw;
-  font-family: "Segoe script", sans-serif;
+  font-family: "Segoe script", "Lumen", "sans-serif"
   
 } 
 
@@ -187,7 +187,7 @@ header {
 
 .form input {
   background-color: none;
-  font-family: "Segoe script", sans-serif;
+  font-family: "Segoe script", "Lumen", "sans-serif";
   font-size: 1rem;
   border-color: #EED3CD;
   width: 80%;
@@ -203,7 +203,7 @@ header {
 }
 
 input {
-  font-family: "Segoe script", sans-serif;
+  font-family: "Segoe script", "Lumen", "sans-serif";
 
 }
 
@@ -224,7 +224,7 @@ button {
 .form button {
   padding: 0;
   border: none;
-  font-family: "Segoe script", sans-serif;
+  font-family: "Segoe script", "Lumen", "sans-serif";
   text-decoration: none;
   padding-bottom: 3px;
   border-radius: 20px;
@@ -246,14 +246,14 @@ button {
   padding-left: 1rem;
   margin-left: 1rem;
   max-width: 80%;
-  font-family: "Segoe script", sans-serif;
+  font-family: "Segoe script", "Lumen", "sans-serif";
   list-style-type: "🙏🏻"
 }
 
 
 
 a {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;;
 }
 
 

@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import Item from "./Item";
 import Axios from "axios";
+import { useGlobalState, setGlobalState  } from "./Login";
 
 
 
 
-const API_BASE = "https://bullet-point-journal-backend.onrender.com";
+const API_BASE = "https://bullet-point-journal-users.onrender.com";
+
 
 
 function Container({heading, onAdd, placeholder, data, allSteps, delSteps, allAffirmations,
   delAff, allGratitudes, delGrat, containerId}) {
   
-
+  let [email] = useGlobalState("email");
   const [inputText, setInputText] = useState("");
+
+  if (email.length > 0) {
+    sessionStorage.setItem("email", email);
+  } else {
+    email = sessionStorage.getItem("email");
+  }
 
   
 
@@ -25,60 +33,53 @@ function Container({heading, onAdd, placeholder, data, allSteps, delSteps, allAf
 
 
 const updateGratitude = async (id, newText) => {
-  const data = await Axios.put(API_BASE + "/gratitude/update/" + id ,{
-    gratitude: newText
+  const data = await Axios.put(API_BASE + "/gratitude/update/" + email + "/" + id,{
+    item: newText
 }).then(res => res.data)
-      //Find index of specific object using findIndex method.    
-      const objIndex = allGratitudes.findIndex((obj => obj._id === id));
-      //Update object's name property.
-      allGratitudes[objIndex].gratitude = data.gratitude;
+   
 }
 
 
 const updateAffirmation = async (id, newText) => {
-  const data = await Axios.put(API_BASE + "/affirmation/update/" + id ,{
-    affirmation: newText
+  const data = await Axios.put(API_BASE + "/affirmation/update/" + email + "/" + id,{
+    item: newText
 }).then(res => res.data)
-      //Find index of specific object using findIndex method.    
-      const objIndex = allAffirmations.findIndex((obj => obj._id === id));
-      //Update object's name property.
-      allAffirmations[objIndex].affirmation = data.affirmation;
+
 }
 
 const updateStep = async (id, newText) => {
-  const data = await Axios.put(API_BASE + "/step/update/" + id ,{
-    step: newText
+  const data = await Axios.put(API_BASE + "/step/update/" + email + "/" + id,{
+    item: newText
 }).then(res => res.data)
-      //Find index of specific object using findIndex method.    
-      const objIndex = allSteps.findIndex((obj => obj._id === id));
-      //Update object's name property.
-      allSteps[objIndex].step = data.step;
+
 }
 
 
 
 
   const deleteGratitude = async (id) => {
-    const data = await Axios.delete(API_BASE + "/gratitude/delete/" + id).then(res => res.data);
+    const data = await Axios.delete(API_BASE + "/gratitude/delete/" + email + "/" + id).then(res => res.data);
   
-      delGrat(allGratitudes => allGratitudes.filter(gratitude => gratitude._id !== data._id));
+      delGrat(data);
+      
+
     
   };
 
   
 
   const deleteAffirmation = async (id) => {
-    const data = await Axios.delete(API_BASE + "/affirmation/delete/" + id).then(res => res.data);
+    const data = await Axios.delete(API_BASE + "/affirmation/delete/" + email + "/" + id).then(res => res.data);
   
-      delAff(allAffirmations => allAffirmations.filter(affirmation => affirmation._id !== data._id));
+      delAff(data);
   
   };
   
   
   const deleteStep = async (id) => {
-    const data = await Axios.delete(API_BASE + "/step/delete/" + id).then(res => res.data);
+    const data = await Axios.delete(API_BASE + "/step/delete/" + email + "/" + id).then(res => res.data);
       
-    delSteps(allSteps => allSteps.filter(step => step._id !== data._id));
+    delSteps(data);
 
 
   };

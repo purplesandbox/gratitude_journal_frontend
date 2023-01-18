@@ -1,39 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "./Header";
 import Container from "./Container";
 import Axios from "axios";
+import { useGlobalState, setGlobalState  } from "./Login";
 
 
 document.body.style.backgroundImage = ("./IMG-1078.jpg");
 
 
-const API_BASE = "https://bullet-point-journal-backend.onrender.com";
+const API_BASE = "https://bullet-point-journal-users.onrender.com";
+
+
+
+
 
 function Home() {
   
 
-  
+  let [email] = useGlobalState("email");
   const [gratitudes, setGratitudes] = useState([]);
   const [affirmations, setAffirmations] = useState([]);
   const [steps, setSteps] = useState([]);
-
   
+
+
+
+  if (email.length > 0) {
+     sessionStorage.setItem("email", email);
+   } else {
+     email = sessionStorage.getItem("email");
+   }
+
+
 
   useEffect(() => {
 
-    Axios.get(API_BASE + "/gratitudes").then((response) => {
+
+
+    Axios.get(API_BASE + "/gratitudes/" + email).then((response) => {
       setGratitudes(response.data);
     });
 
-    Axios.get(API_BASE + "/affirmations").then((response) => {
+    Axios.get(API_BASE + "/affirmations/" + email).then((response) => {
       setAffirmations(response.data);
     });
 
-    Axios.get(API_BASE + "/steps").then((response) => {
+    Axios.get(API_BASE + "/steps/" + email).then((response) => {
       setSteps(response.data);
       }); 
-    
+
+ 
   }, []);
+
+
+ 
+
 
 
 //////// Create records ///////////
@@ -41,66 +62,60 @@ function Home() {
 // Adding a gratitude record
 
 const addGratitude =  async (inputText) => {
-  const gratitude = await Axios.post(API_BASE + "/gratitude/new", {
+  const gratitude = await Axios.put(API_BASE + "/gratitude/new/" + email, {
 
-          gratitude: inputText     
+        item: inputText      
     
       }).then(res => res.data)
    
-      setGratitudes((x) => {
-        return [...x, gratitude];
-      });
+      setGratitudes(gratitude);
 };
 
 // Adding an affirmation record 
 
 const addAffirmation =  async (inputText) => {
-  const affirmation = await Axios.post(API_BASE + "/affirmation/new", {
+  const affirmation = await Axios.put(API_BASE + "/affirmation/new/" + email, {
 
-          affirmation: inputText     
+          item: inputText     
     
       }).then(res => res.data)
    
-      setAffirmations((y) => {
-        return [...y, affirmation];
-      });
+      setAffirmations(affirmation);
 };
 
 // Adding a step record 
 
 const addStep =  async (inputText) => {
-  const step = await Axios.post(API_BASE + "/step/new", {
+  const step = await Axios.put(API_BASE + "/step/new/" + email, {
 
-          step: inputText     
+          item: inputText     
     
       }).then(res => res.data)
    
-       setSteps((z) => {
-          return [...z, step];
-      });
+       setSteps(step);
 };
 
 
-///////// From each record in an array create an object with two keys and values - one for the id  /////////
+/////// From each record in an array create an object with two keys and values - one for the id  /////////
 
   const gr = gratitudes.map((i, index) => {
     
     return (
-      {text:i.gratitude, id:i._id}
+      {text:i.item, id:index}
       
       );
   });
 
   const aff = affirmations.map((i, index) => {
     return (
-      {text:i.affirmation, id:i._id}
+      {text:i.item, id:index}
       );
   });
 
 
   const st = steps.map((i, index) => {
     return (
-      {text:i.step, id:i._id}
+      {text:i.item, id:index}
     );
   });
 
@@ -129,8 +144,8 @@ const addStep =  async (inputText) => {
         
         <Container
         containerId = "affirmations"
-        placeholder = "I'm ..✍🏻"
-        heading = "What would make today great?"
+        placeholder = " ..✍🏻"
+        heading = "My affirmations"
         onAdd={addAffirmation}
         data = {aff}
         allAffirmations = {affirmations}

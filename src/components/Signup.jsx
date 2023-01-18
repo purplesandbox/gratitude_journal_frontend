@@ -1,11 +1,28 @@
 import React, {useEffect, useState} from "react";
 import Validation from "./Validation";
 import Axios from "axios";
+import { createGlobalState } from "react-hooks-global-state";
+import Login from "./Login";
+
 
 const API_BASE = "https://bullet-point-journal-users.onrender.com";
 
+const { setGlobalState , useGlobalState} = createGlobalState({
+
+  email:""
+ 
+});
+
 
   function Signup({submitForm}) {
+
+    let [email] = useGlobalState("email");
+
+    if (email.length > 0) {
+      sessionStorage.setItem("email", email);
+    } else {
+      email = sessionStorage.getItem("email");
+    }
 
     const [values, setValues] = useState({
       fname:"",
@@ -23,6 +40,11 @@ const API_BASE = "https://bullet-point-journal-users.onrender.com";
         ...values,
         [event.target.name]:event.target.value,
       })
+
+      setGlobalState(
+        "email", values.email
+    
+      );
     }
 
 
