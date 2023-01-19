@@ -8,7 +8,8 @@ import { useGlobalState, setGlobalState  } from "./Login";
 document.body.style.backgroundImage = ("./IMG-1078.jpg");
 
 
-const API_BASE = "https://bullet-point-journal-users.onrender.com";
+// const API_BASE = "https://bullet-point-journal-users.onrender.com";
+const API_BASE = "http://localhost:3002";
 
 
 

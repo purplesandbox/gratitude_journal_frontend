@@ -5,7 +5,8 @@ import { createGlobalState } from "react-hooks-global-state";
 import Login from "./Login";
 
 
-const API_BASE = "https://bullet-point-journal-users.onrender.com";
+// const API_BASE = "https://bullet-point-journal-users.onrender.com";
+const API_BASE = "http://localhost:3002";
 
 const { setGlobalState , useGlobalState} = createGlobalState({
 

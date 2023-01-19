@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import md5 from "md5";
 import { createGlobalState } from "react-hooks-global-state";
 
-const API_BASE = "https://bullet-point-journal-users.onrender.com";
+// const API_BASE = "https://bullet-point-journal-users.onrender.com";
+const API_BASE = "http://localhost:3002";
 
 const { setGlobalState , useGlobalState} = createGlobalState({
 
@@ -61,7 +62,7 @@ function Login() {
           const relIndex = dataFetched.findIndex((obj => obj.email === email));
         
 
-          if (response.data[relIndex]["password"] === password) {
+          if (response.data[relIndex]["password"] === md5(password)) {
             
             navigate('/home'); 
           } else {
